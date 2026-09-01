@@ -1,0 +1,147 @@
+{
+  "updated": "2026-09-01",
+  "note": "能力分数来自第三方独立评测，与本价格库分开维护。分数只代表公开基准表现，不等于你的业务场景表现。",
+  "snapshotNote": "同一模型的不同日期快照（如 DeepSeek V4 Pro 与 V4 Pro 0813）在 Artificial Analysis 上被当作两个独立条目分别评测，分数可能相差很大（45.3 vs 53.2）。本表按 AA 口径原样并列列出，未做合并——选型时请认准你要调用的那个具体版本号。",
+  "blendNote": "混合价按业界常用的输入:输出 = 3:1 加权，即 (in×3 + out) / 4，单位 USD / 每百万 token。",
+  "valueNote": "每美元智能 = 智能指数 ÷ 混合价。数值越高，说明同样一块钱买到的基准能力越多。它是性价比参考，不是质量排名。",
+
+  "defs": {
+    "aaii": {
+      "name": "智能指数",
+      "full": "Artificial Analysis Intelligence Index v4.1.1",
+      "range": "0–100",
+      "desc": "9 项独立评测加权：GDPval-AA v2（真实职场任务）、τ³-Banking（工具调用）、Terminal-Bench v2.1（终端 Agent）、SciCode（科研编程）、Humanity's Last Exam（推理与知识）、GPQA Diamond（科学推理）、CritPt（物理推理）、AA-Omniscience（知识与幻觉）、AA-LCR（长上下文推理）。",
+      "higher": true
+    },
+    "costPerTask": {
+      "name": "单任务成本",
+      "full": "Weighted average cost per Intelligence Index task",
+      "unit": "USD",
+      "desc": "跑完一个「智能指数任务」的加权平均花费。按每个评测的输入 / 缓存命中 / 缓存写入 / 推理 / 回答 token 计价，除以任务数，再按指数权重加权。这是把「价格」和「会用多少 token」一起算进去的真实花费。",
+      "higher": false
+    },
+    "speed": {
+      "name": "输出速度",
+      "unit": "tokens/s",
+      "desc": "每秒输出 token 数。对话/交互场景比批量场景更看重。",
+      "higher": true
+    },
+    "value": {
+      "name": "每美元智能",
+      "unit": "分 / (USD per 1M)",
+      "desc": "智能指数 ÷ 混合价。回答「便宜但做不对是否划算」的核心指标。",
+      "higher": true,
+      "derived": true
+    }
+  },
+
+  "sources": [
+    {
+      "name": "Artificial Analysis — Intelligence Index v4.1.1 榜单（含每任务成本、输出速度）",
+      "date": "2026-08-27",
+      "url": "https://artificialanalysis.ai/models",
+      "used": ["aaii", "costPerTask", "speed"],
+      "caveat": "AA 只对图表里选中的 29 个模型公布 costPerTask 与 speed（共收录 626 个模型），因此大部分模型的这两项是空的。"
+    },
+    {
+      "name": "BenchmarkList — Artificial Analysis Intelligence Index 结果表（精确分，207 个模型）",
+      "date": "2026-08-27",
+      "url": "https://benchmarklist.com/benchmarks/artificial_analysis_intelligence_index",
+      "used": ["aaii"]
+    },
+    {
+      "name": "Aider polyglot benchmark — 225 道 Exercism 编程题（C++/Go/Java/JS/Python/Rust），记录正确率与总花费",
+      "date": "2026-08",
+      "url": "https://aider.chat/docs/leaderboards/",
+      "used": ["tasks"]
+    },
+    {
+      "name": "OpenAI GDPval — 1,320 个真实职场任务（9 大行业 / 44 个职业），专家盲评",
+      "date": "2025-09-25",
+      "url": "https://openai.com/index/gdpval/",
+      "used": ["tasks"]
+    }
+  ],
+
+  "scores": {
+    "claude-opus-5":            { "aaii": 63.1, "costPerTask": 2.34, "speed": 53,  "aaName": "Claude Opus 5 (Adaptive Reasoning, Max Effort)" },
+    "claude-fable-5":           { "aaii": 62.1, "costPerTask": 3.14, "speed": 67,  "aaName": "Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)" },
+    "grok-46":                  { "aaii": 60.9, "costPerTask": 0.94, "speed": 54,  "aaName": "Grok 4.6 (high)" },
+    "gpt-56-sol":               { "aaii": 60.9, "costPerTask": 0.95, "speed": 77,  "aaName": "GPT-5.6 Sol (max)" },
+    "kimi-k3":                  { "aaii": 59.7, "costPerTask": 0.84, "speed": 38,  "aaName": "Kimi K3 (max)" },
+    "glm-53":                   { "aaii": 59.5, "costPerTask": 0.68, "speed": 72,  "aaName": "GLM-5.3 (max)" },
+    "qwen38-max":               { "aaii": 58.1, "costPerTask": null, "speed": null, "aaName": "Qwen3.8 Max" },
+    "glm-53-flash":             { "aaii": 57.5, "costPerTask": null, "speed": null, "aaName": "GLM-5.3-Flash" },
+    "claude-opus-48":           { "aaii": 57.3, "costPerTask": null, "speed": null, "aaName": "Claude Opus 4.8 (Adaptive Reasoning, Max Effort)" },
+    "gpt-56-terra":             { "aaii": 56.6, "costPerTask": null, "speed": null, "aaName": "GPT-5.6 Terra (max)" },
+    "gemini-37-flash":          { "aaii": 56.0, "costPerTask": 0.40, "speed": 287, "aaName": "Gemini 3.7 Flash (high)" },
+    "claude-sonnet-5":          { "aaii": 55.3, "costPerTask": null, "speed": null, "aaName": "Claude Sonnet 5 (Adaptive Reasoning, Max Effort)" },
+    "deepseek-v4-pro-0813":     { "aaii": 53.2, "costPerTask": 0.27, "speed": 54,  "aaName": "DeepSeek V4 Pro 0813 (Reasoning, Max Effort)" },
+    "glm-52":                   { "aaii": 52.6, "costPerTask": null, "speed": null, "aaName": "GLM-5.2 (max)" },
+    "gpt-56-luna":              { "aaii": 52.3, "costPerTask": 0.05, "speed": 129, "aaName": "GPT-5.6 Luna (max)" },
+    "deepseek-v4-flash-0731":   { "aaii": 51.8, "costPerTask": null, "speed": null, "aaName": "DeepSeek V4 Flash 0731 (Reasoning, Max Effort)" },
+    "claude-sonnet-46":         { "aaii": 48.4, "costPerTask": null, "speed": null, "aaName": "Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort)" },
+    "gemini-31-pro":            { "aaii": 47.7, "costPerTask": null, "speed": null, "aaName": "Gemini 3.1 Pro Preview" },
+    "qwen37-max":               { "aaii": 46.7, "costPerTask": null, "speed": null, "aaName": "Qwen3.7 Max" },
+    "minimax-m3":               { "aaii": 45.4, "costPerTask": null, "speed": null, "aaName": "MiniMax-M3" },
+    "deepseek-v4-pro":          { "aaii": 45.3, "costPerTask": null, "speed": 54,  "aaName": "DeepSeek V4 Pro (Reasoning, Max Effort)" },
+    "claude-opus-46":           { "aaii": 44.9, "costPerTask": null, "speed": null, "aaName": "Claude Opus 4.6 (Adaptive Reasoning, Max Effort)" },
+    "deepseek-v4-flash":        { "aaii": 42.1, "costPerTask": null, "speed": null, "aaName": "DeepSeek V4 Flash (Reasoning, Max Effort)" },
+    "qwen37-plus":              { "aaii": 39.4, "costPerTask": null, "speed": null, "aaName": "Qwen3.7 Plus" },
+    "o3":                       { "aaii": 31.1, "costPerTask": null, "speed": null, "aaName": "o3" },
+    "claude-haiku-45":          { "aaii": 29.9, "costPerTask": null, "speed": null, "aaName": "Claude 4.5 Haiku (Reasoning)" },
+    "o4-mini":                  { "aaii": 26.1, "costPerTask": null, "speed": null, "aaName": "o4-mini (high)" },
+    "gemini-25-flash":          { "aaii": 20.3, "costPerTask": null, "speed": null, "aaName": "Gemini 2.5 Flash (Reasoning)" }
+  },
+
+  "noData": {
+    "ids": ["qwen-turbo", "doubao-seed-2-lite", "hunyuan-turbos", "hunyuan-turbo", "doubao-seed-2-pro", "hunyuan-hy2",
+            "ernie-45", "spark-ultra", "spark-x2", "yi-large",
+            "gpt-4o-mini", "gemini-25-flash-lite", "claude-mythos-5"],
+    "reason": "该模型未出现在 Artificial Analysis 榜单的公开结果中（多为国内独占型号、旧型号或未开放评测的型号）。没有数据就不编——宁可空着。"
+  },
+
+  "tasks": {
+    "aider": {
+      "name": "Aider polyglot 编程实测",
+      "desc": "225 道 Exercism 编程题，覆盖 C++ / Go / Java / JavaScript / Python / Rust。模型在无人工干预下独立完成编辑，用项目自带测试判定正确与否，并记录跑完全部 225 题的真实 API 花费。",
+      "unit": "225 题",
+      "metric": "正确率 + 跑完全套的总花费",
+      "caveat": "数据来自 Aider 官方榜单，模型版本为榜单收录时的版本，部分为上一代旗舰；用于说明「正确率与花费的关系」，不代表当前最新版本。",
+      "rows": [
+        { "model": "GPT-5 (high)",             "acc": 88.0, "cost": 29.08 },
+        { "model": "GPT-5 (medium)",           "acc": 86.7, "cost": 17.69 },
+        { "model": "o3-pro (high)",            "acc": 84.9, "cost": 146.32 },
+        { "model": "Gemini 2.5 Pro (32k 思考)", "acc": 83.1, "cost": 49.88 },
+        { "model": "GPT-5 (low)",              "acc": 81.3, "cost": 10.37 },
+        { "model": "o3 (high)",                "acc": 81.3, "cost": 21.23 },
+        { "model": "Grok 4 (high)",            "acc": 79.6, "cost": 59.62 },
+        { "model": "o3 (high) + GPT-4.1 架构", "acc": 78.2, "cost": 17.55 },
+        { "model": "o3",                       "acc": 76.9, "cost": 13.75 },
+        { "model": "DeepSeek V3.2-Exp 推理版",  "acc": 74.2, "cost": 1.30 },
+        { "model": "Claude Opus 4 (32k 思考)", "acc": 72.0, "cost": 65.75 },
+        { "model": "o4-mini (high)",           "acc": 72.0, "cost": 19.64 },
+        { "model": "DeepSeek R1 0528",         "acc": 71.4, "cost": 4.80 },
+        { "model": "Claude Opus 4 (无思考)",   "acc": 70.7, "cost": 68.63 },
+        { "model": "DeepSeek V3.2-Exp 对话版", "acc": 70.2, "cost": 0.88 },
+        { "model": "Claude Sonnet 4 (32k 思考)", "acc": 61.3, "cost": 26.58 },
+        { "model": "Kimi K2",                  "acc": 59.1, "cost": 1.24 },
+        { "model": "DeepSeek R1",              "acc": 56.9, "cost": 5.42 },
+        { "model": "Gemini 2.5 Flash (24k)",   "acc": 55.1, "cost": 8.56 },
+        { "model": "DeepSeek V3 0324",         "acc": 55.1, "cost": 1.12 }
+      ]
+    },
+    "gdpval": {
+      "name": "OpenAI GDPval 真实职场任务",
+      "desc": "1,320 个来自 9 大行业、44 个知识职业的真实工作任务（完整集），公开评测用其中 220 道 gold 任务。任务由平均 14 年经验的资深从业者出题并评审，交付物包含文档、幻灯片、图表、表格、多媒体。同职业专家盲评，判定模型产物「优于 / 持平 / 差于」人类专家。",
+      "unit": "220 道 gold 任务",
+      "metric": "与人类专家持平或更好的比例",
+      "caveat": "OpenAI 未逐模型公布精确胜率，仅公布：最佳模型（Claude Opus 4.1）在「略低于一半」任务上持平或优于人类；前沿模型完成任务比行业专家约快 100 倍、便宜 100 倍（仅计纯推理时间与 API 费率，不含人工监督与迭代）。",
+      "rows": [
+        { "model": "Claude Opus 4.1", "note": "最佳表现：略低于一半任务达到与人类专家持平或更好；排版/幻灯片布局等美学维度突出" },
+        { "model": "GPT-5", "note": "准确性突出，尤其在查找领域专业知识上；从 GPT-4o 到 GPT-5 的表现提升为「一年三倍以上」" },
+        { "model": "o3 / o4-mini / Gemini 2.5 Pro / Grok 4 / GPT-4o", "note": "参与盲评，OpenAI 以柱状图呈现，未公布逐模型精确胜率" }
+      ]
+    }
+  }
+}
