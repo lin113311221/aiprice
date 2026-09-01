@@ -1,6 +1,6 @@
 # aiprice — 大模型 API 比价数据（Agent 友好）
 
-> 在线比价站：**https://ask.aiprice.store**
+> 在线比价站：**https://product.aiprice.store/ask**
 > 同一价格库，同时提供给网页、公开 API 和 MCP，人和 Agent 读到的是同一份数据。
 
 收录 **42 个主流大模型 × 14 家厂商**（深度求索 / 阿里云百炼 / 火山引擎 / 智谱 / Moonshot / MiniMax / 腾讯 / 百度 / 讯飞 / 零一万物 / Google / OpenAI / Anthropic / xAI），包含：
@@ -19,7 +19,7 @@
 {
   "mcpServers": {
     "aiprice": {
-      "url": "https://ask.aiprice.store/api/mcp"
+      "url": "https://product.aiprice.store/api/mcp"
     }
   }
 }
@@ -31,16 +31,16 @@
 
 ```bash
 # 全量价格库
-curl "https://ask.aiprice.store/api/models"
+curl "https://product.aiprice.store/api/models"
 
 # 只要国内可用、按混合价排序
-curl "https://ask.aiprice.store/api/models?cn=1&sort=mixed"
+curl "https://product.aiprice.store/api/models?cn=1&sort=mixed"
 
 # 按你的用量（输入 5M / 输出 2M token / 缓存命中 30%）算各家月费
-curl "https://ask.aiprice.store/api/compare?in=5&out=2&cache=30"
+curl "https://product.aiprice.store/api/compare?in=5&out=2&cache=30"
 
 # 给 LLM 直接读的纯文本价格表
-curl "https://ask.aiprice.store/api/llms.txt"
+curl "https://product.aiprice.store/api/llms.txt"
 ```
 
 其他端点：`/api/health` `/api/schema` `/api/vendors`。无需鉴权，响应带 5 分钟边缘缓存。
@@ -67,4 +67,4 @@ curl "https://ask.aiprice.store/api/llms.txt"
 
 ---
 
-**English**: Curated LLM API pricing for 42 models / 14 vendors — prices, context, free tiers, peak/off-peak rates (DeepSeek), channel comparison (official / OpenRouter / SiliconFlow), third-party intelligence benchmarks, and real task costs. Free JSON API + MCP server at https://ask.aiprice.store/api — same dataset the website uses. Issues for price corrections welcome.
+**English**: Curated LLM API pricing for 42 models / 14 vendors — prices, context, free tiers, peak/off-peak rates (DeepSeek), channel comparison (official / OpenRouter / SiliconFlow), third-party intelligence benchmarks, and real task costs. Free JSON API + MCP server at https://product.aiprice.store/api — same dataset the website uses. Issues for price corrections welcome.
